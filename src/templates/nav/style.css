@@ -1,0 +1,15 @@
+
+.nav-container{
+    display : flex;
+    justify-content: flex-start;
+    background-color: darkred;
+}
+
+.nav-judul{
+    flex : 1;
+    font-size: x-large;
+    color : white;
+    padding: 5px 10px;
+    margin : 10px ;
+    margin-left: 50px;
+}

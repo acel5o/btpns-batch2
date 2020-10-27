@@ -1,0 +1,71 @@
+.judul{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+}
+.container-card{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.card{
+    box-shadow: 4px 0px 6px 4px darkred;
+    max-width: 800px;
+    text-align: justify;
+    font-family: arial;
+    background-color: black;
+}
+.isi-card{
+    padding: 10px 15px 10px 15px;
+    color : white;
+}
+
+.table1 {
+    font-family: sans-serif;
+    color: #fff;
+    border-collapse: collapse;
+    width: 50%;
+    border: 2px solid #f2f5f7;
+}
+
+.table1 tr th{
+    background: darkred;
+    color: #fff;
+    font-weight: normal;
+}
+
+.table1, th, td {
+    padding: 8px 20px;
+    text-align: center;
+}
+label{
+    color: #fff
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  input[type=button], input[type=submit], input[type=reset] {
+    background-color:darkred;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  

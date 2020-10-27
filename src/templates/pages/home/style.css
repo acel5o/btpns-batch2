@@ -1,0 +1,24 @@
+.judul{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+}
+.container-card{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.card{
+    box-shadow: 4px 0px 6px 4px darkred;
+    max-width: 800px;
+    text-align: justify;
+    font-family: arial;
+    background-color: black;
+}
+.isi-card{
+    padding: 10px 15px 10px 15px;
+    color : white;
+}
