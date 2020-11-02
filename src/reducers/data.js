@@ -15,6 +15,11 @@ const fetchData = (state = initialState, action) => {
                 ...state,
                 tampung: [...state.tampung, action.payload.dataRegister]
             }
+        case "DELETE":
+            return {
+                ...state,
+                tampung: state.tampung.filter((item, index) => index !== action.payload),
+            }
         default:
             return state
     }
