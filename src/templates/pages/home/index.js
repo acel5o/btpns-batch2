@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import "./style.css";
 import Gambar from "./react.png"
-import {Card,CardIsi,Tabel} from "../../../components"
+import {Card,CardIsi} from "../../../components"
 import {Redirect,Link} from "react-router-dom"
+import { connect } from "react-redux"
 
 class Home extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class Home extends Component {
                             yang artinya kita dapat membuat berbagai UI yang bisa kita bagi menjadi beberapa komponen. 
                             
                             {this.props.statusLogin?
-                                <Link to="/login">
+                                <Link to="/home">
                                     <button>Pindah Ke Login</button> 
                                 </Link>
                             :
@@ -57,5 +58,9 @@ class Home extends Component {
          );
     }
 }
+
+const mapStateToProps = (state) => ({
+    statusLogin: state.auth.isLoggedIn
+})
  
-export default Home;
+export default connect(mapStateToProps)(Home)

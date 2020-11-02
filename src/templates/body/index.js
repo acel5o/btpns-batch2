@@ -17,7 +17,7 @@ class Body extends Component {
     // }
 
     addUsers = obj =>{
-        const {username,email,password,hak} = obj
+        const {username,email,password} = obj
         let oldUsers = this.state.admins
         if(username==="Bret"){
             oldUsers.push({
@@ -34,7 +34,7 @@ class Body extends Component {
     }
 
     Users = obj =>{
-        const {username,email,password,hak} = obj
+        const {username,email,password} = obj
         let oldUsers = this.state.admins
         if(username!=="Bret"){
             oldUsers.push({

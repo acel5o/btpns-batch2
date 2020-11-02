@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "./style.css";
-import Gambar from "./react.png"
-import {Card,CardIsi,Tabel,Label,Input,Container} from "../../components"
+import {Label,Input,Container} from "../../components"
 class Contents extends Component {
     constructor(props) {
         super(props);

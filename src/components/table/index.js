@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Tr,Td} from "../../components"
+import {Tr} from "../../components"
 class Tabel extends Component {
     constructor(props) {
         super(props);
@@ -11,10 +11,9 @@ class Tabel extends Component {
             <table className="table1">
                 <thead>
                 <Tr>
-                    <th>ID</th>
-                    <th>Name</th>
                     <th>Username</th>
-                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Roles</th>
                     <th>Action</th>
                 </Tr>
                 </thead>

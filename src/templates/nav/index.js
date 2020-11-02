@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./style.css"
 import {Menu} from "../../components"
 import {Link} from "react-router-dom"
+import { connect } from "react-redux"
 
 class Nav extends Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class Nav extends Component {
                     </Link>
                     <Link to="/user"><Menu text="RegisUser" /></Link>
                     <Link to="/login">
-                        <Menu text="Logout" goToPage={this.props.changeLogin}/>
+                        <Menu text="Logout" goToPage={this.props.doLogout}/>
                     </Link>
                 </>
                     :
@@ -54,5 +55,14 @@ class Nav extends Component {
 
     }
 }
- 
-export default Nav;
+
+
+const mapStateToProps = (state) => ({
+    statusLogin: state.auth.isLoggedIn
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    doLogout: () => dispatch({ type: "LOGOUT" })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

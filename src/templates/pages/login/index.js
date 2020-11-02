@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import {Label,Input,Container,Tabel,Tr} from "../../../components"
-// import {Regis} from "../../../templates"
+import {Label,Input,Container,Tabel} from "../../../components"
 import "./style.css"
+import { connect } from "react-redux"
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            tampung:[]
+            username:"",
+            password:""
          }
     }
     
@@ -18,27 +19,30 @@ class Login extends Component {
     }
 
     onLogin = () => {
-        const {username,password} = this.state
-        const ada = this.props.listadmin.find(user => (user.username === username &&  user.password === password && user.hak==="admin"))
-        const ida = this.props.listadmin.find(user => (user.username === username &&  user.password === password && user.hak==="user"))
-        if(ada) {
-            alert(`Welcome Admin`)
-            this.props.changeLogin()
-        }else if(ida){
-            alert(`Welcome User`)
-            this.props.changeLogin()
-        }else{alert("Gagal Login")}
-    }
+        const { username, password } = this.state
+        if (username && password){    
+            let statusLogin = this.props.userList.find(user => (user.username === username && user.name === password))
+            if (statusLogin){
+                window.alert('Berhasil Login!')
+                let role = statusLogin.role
+                this.props.doLogin({username,password,role})     
+            }else {
+                window.alert('Password atau Username Tidak Sesuai')
+            }
+          }
+          else {
+              window.alert("Username dan Password tidak boleh kosong!")
+          }
+        }
     
-    async componentDidMount(){
-        await fetch('https://jsonplaceholder.typicode.com/users')
+
+     componentDidMount(){
+         fetch('http://localhost:3001/data')
         .then(response => response.json())
-        .then(json => this.setState({tampung : json}))    
-        console.log(this.state.tampung);
+        .then(json => this.props.doFetch(json))    
     }
 
     render() { 
-
         return ( 
             
             <>
@@ -59,16 +63,19 @@ class Login extends Component {
                 {this.props.statusLogin?
                 <tbody>
                        { 
-                       this.state.tampung.map((user,idx) => {
-                                   return <tr key={idx}>
-                                      <td>{user.id}</td>
-                                      <td>{user.name}</td>
+                       this.props.userList.map((user,idx) => {
+                               return <tr key={idx}>
                                       <td>{user.username}</td>
-                                      <td>{user.email}</td>
-                                      <td>
+                                      <td>{user.name}</td>
+                                      <td>{user.role}</td>
+                                      <td>{this.props.dataLogin.role==="admin"?
                                           <><button>Detail</button>
                                           <button>Edit</button>
                                           <button>Delete</button></>
+                                    :
+                                          <><button>Detail</button>
+                                          <button>Edit</button></>
+                       }
                                       </td>
                                     </tr>
                          })
@@ -82,4 +89,19 @@ class Login extends Component {
     }
 }
  
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        statusLogin: state.auth.isLoggedIn,
+        userList : state.data.tampung,
+        dataLogin : state.auth.dataLogin
+    }
+    
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    doFetch: (data) => dispatch({ type: "FETCH", payload: { tampung:data } }),
+    doLogin: (dataLogin) => dispatch({ type: "LOGIN", payload: {dataLogin}}),
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

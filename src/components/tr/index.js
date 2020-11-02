@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Td} from "../../components"
 
 class Tr extends Component {
     constructor(props) {
