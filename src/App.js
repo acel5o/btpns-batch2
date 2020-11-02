@@ -1,6 +1,7 @@
 import React, {Component }from 'react';
 import {Body,Nav} from "./templates"
 import "./App.css"
+import {connect} from "react-redux"
 
 
 class App  extends Component {
@@ -19,19 +20,12 @@ class App  extends Component {
     //         page
     //     })
     // }
-
-    changeLogIn = () =>{
-        this.setState(oldState=>({isLoggedIn:!oldState.isLoggedIn}))
-    }
-
-    doLogin = () => {
-        this.setState({ isLoggedIn: true })
-      }
-    
-    doLogout = () => {
-        this.setState({ isLoggedIn: false })
-    }
   
+    componentDidMount(){
+        fetch('http://localhost:3001/data')
+       .then(response => response.json())
+       .then(json => this.props.doFetch(json))    
+   }
     render() { 
         return (  
             <>
@@ -44,4 +38,7 @@ class App  extends Component {
         );
     }
 }   
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+    doFetch: (data) => dispatch({ type: "FETCH", payload: { tampung:data } }),
+})
+export default connect(null, mapDispatchToProps)(App);

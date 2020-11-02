@@ -10,6 +10,11 @@ const fetchData = (state = initialState, action) => {
             return {
                 tampung:action.payload.tampung
             }
+        case "REGISTER":
+            return {
+                ...state,
+                tampung: [...state.tampung, action.payload.dataRegister]
+            }
         default:
             return state
     }

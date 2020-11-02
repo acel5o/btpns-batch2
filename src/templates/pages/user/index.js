@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {Label,Input,Container} from "../../../components"
 import "./style.css"
+import { connect } from "react-redux"
 
 class User extends Component {
     constructor(props) {
         super(props);
         this.state = 
         {
-            admins:[],
             username :"",
-            email :"",
+            name :"",
             password :"",
-            hak:"user"
+            role:"user"
         }
     }
 
@@ -24,27 +24,20 @@ class User extends Component {
         console.log(e.target.name);
     }
 
-    onReg = () => {
-        const { email, password, username, hak } = this.state
-        this.props.tambahuser({email,password,username,hak})
-        
-        // Cara Pertama ==> Get dulu data baru masukin data
-        // let oldUsers = this.state.users
-        // oldUsers.push({
-        //     name,
-        //     email,
-        //     password
-        // }) 
-
-        //  this.setState({
-        //     users : oldUsers
-        // })  
-
-        // Cara Kedua
-        // await this.setState(oldState => {
-        //     let oldData = oldState.users
-        //     oldData.push({name,email,password})
-        // })
+    onRegis =  () => {
+        const {username,name,password,role} = this.state
+        const UserList = this.props.userList.find(user => (user.username === username))
+        if (username && password){   
+            if (UserList){
+                window.alert('Username sudah digunakan!');
+            }else{
+                    window.alert('Pendaftaran Berhasil!')
+                    this.props.doRegist({username,name,password,role})
+            }
+        }
+        else {
+            window.alert("Username dan Password tidak boleh kosong!")
+        }
     }
 
     render() { 
@@ -58,16 +51,27 @@ class User extends Component {
                 <Label nmlabel="fname">Username</Label>
                 <Input type="text" id="nama" name="username" onChange={this.onInputChange}/>
                 <Label nmlabel="lname">Email</Label>
-                <Input type="text" id="email" name="email" onChange={this.onInputChange}/>
+                <Input type="text" id="email" name="name" onChange={this.onInputChange}/>
                 <Label nmlabel="lname">Password</Label>
                 <Input type="password" id="password" name="password" onChange={this.onInputChange}/>
                 <Input type="reset" value="Reset" name="ulang" />
-                <Input type="button" value="Save" onClickInput={this.onReg} />
+                <Input type="button" value="Save" onClickInput={this.onRegis} />
             </form>
             </Container>
             </>
         );
     }
 }
- 
-export default User;
+
+const mapStateToProps = (state) => {
+    return {
+        userList : state.data.tampung,
+    }
+    
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    doRegist: (dataRegister) => dispatch({ type: "REGISTER", payload: {dataRegister}}),
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(User)

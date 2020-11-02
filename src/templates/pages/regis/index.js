@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import {Label,Input,Container} from "../../../components"
 import "./style.css"
+import { connect } from "react-redux"
+
 
 class Regis extends Component {
     constructor(props) {
         super(props);
         this.state = 
         {
-            admins:[],
             username :"",
-            email :"",
+            name :"",
             password :"",
-            hak :""
+            role :"admin"
         }
     }
 
@@ -25,8 +26,19 @@ class Regis extends Component {
     }
 
     onRegis =  () => {
-        const { email, password, username,hak} = this.state
-        this.props.tambah({email,password,username,hak})
+        const {username,name,password,role} = this.state
+        const UserList = this.props.userList.find(user => (user.username === username))
+        if (username && password){   
+            if (UserList){
+                window.alert('Username sudah digunakan!');
+            }else{
+                    window.alert('Pendaftaran Berhasil!')
+                    this.props.doRegist({username,name,password,role})
+            }
+        }
+        else {
+            window.alert("Username dan Password tidak boleh kosong!")
+        }
         
         // Cara Pertama ==> Get dulu data baru  masukin data
         // let oldUsers = this.state.users
@@ -58,7 +70,7 @@ class Regis extends Component {
                 <Label nmlabel="fname">Username</Label>
                 <Input type="text" id="nama" name="username" onChange={this.onInputChange}/>
                 <Label nmlabel="lname">Email</Label>
-                <Input type="text" id="email" name="email" onChange={this.onInputChange}/>
+                <Input type="text" id="email" name="name" onChange={this.onInputChange}/>
                 <Label nmlabel="lname">Password</Label>
                 <Input type="password" id="password" name="password" onChange={this.onInputChange}/>
                 <Input type="reset" value="Reset" name="ulang" />
@@ -69,5 +81,16 @@ class Regis extends Component {
         );
     }
 }
- 
-export default Regis;
+
+const mapStateToProps = (state) => {
+    return {
+        userList : state.data.tampung,
+    }
+    
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    doRegist: (dataRegister) => dispatch({ type: "REGISTER", payload: {dataRegister}}),
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Regis)

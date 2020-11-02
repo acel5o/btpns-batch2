@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Home,Regis,Login,User} from '../../templates';
+import {Home,Regis,Login,User,DataUser} from '../../templates';
 import {Switch,Route} from "react-router-dom"
 
 class Body extends Component {
@@ -51,7 +51,6 @@ class Body extends Component {
     }
     
     showPage = () => {
-        const { changeLogin, statusLogin } = this.props
         // const { page } = this.props
 
         // if (page === "Home")
@@ -67,11 +66,9 @@ class Body extends Component {
                     <Route exact path="/" component={Regis}>
                         <Regis tambah = {this.addUsers}/>
                     </Route>
-                    <Route path="/home" children={(props) => <Home {...props} statusLogin={statusLogin} />} />
-                    <Route  path="/login" children={(props) => <Login {...props} statusLogin={statusLogin} 
-                                                                                changeLogin={changeLogin}  
-                                                                                listadmin={this.state.admins}
-                                                                                />}>
+                    <Route path="/home" component={Home} />
+                    <Route  path="/datauser" component={DataUser}></Route>
+                    <Route  path="/login" component={Login}>
                         {/* <Login changeLogin={this.props.changeLogin} listUsers={this.state.users} /> */}
                     </Route>
                     <Route path="/user" component={User}>

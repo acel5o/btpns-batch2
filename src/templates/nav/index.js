@@ -26,6 +26,7 @@ class Nav extends Component {
                         <Menu text="Home" />
                     </Link>
                     <Link to="/user"><Menu text="RegisUser" /></Link>
+                    <Link to="/datauser"><Menu text="Data User" /></Link>
                     <Link to="/login">
                         <Menu text="Logout" goToPage={this.props.doLogout}/>
                     </Link>

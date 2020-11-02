@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Label,Input,Container,Tabel} from "../../../components"
+import {Label,Input,Container} from "../../../components"
 import "./style.css"
 import { connect } from "react-redux"
+import {Redirect} from "react-router-dom"
 
 class Login extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class Login extends Component {
     onLogin = () => {
         const { username, password } = this.state
         if (username && password){    
-            let statusLogin = this.props.userList.find(user => (user.username === username && user.name === password))
+            let statusLogin = this.props.userList.find(user => (user.username === username && user.password === password))
             if (statusLogin){
                 window.alert('Berhasil Login!')
                 let role = statusLogin.role
@@ -36,15 +37,13 @@ class Login extends Component {
         }
     
 
-     componentDidMount(){
-         fetch('http://localhost:3001/data')
-        .then(response => response.json())
-        .then(json => this.props.doFetch(json))    
-    }
+    
 
     render() { 
+    if (this.props.statusLogin)
+        return <Redirect to="/home" />
+
         return ( 
-            
             <>
             <div className="judul">
                  LOGIN FORM
@@ -59,7 +58,7 @@ class Login extends Component {
                 <Input type="button" value="Login" onClickInput={this.onLogin}/>
             </form>
             </Container>
-            <Tabel>
+            {/* <Tabel>
                 {this.props.statusLogin?
                 <tbody>
                        { 
@@ -83,7 +82,7 @@ class Login extends Component {
               </tbody> : 
                          <></>
                     }
-              </Tabel>      
+              </Tabel>       */}
             </>
          );
     }
@@ -99,7 +98,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    doFetch: (data) => dispatch({ type: "FETCH", payload: { tampung:data } }),
     doLogin: (dataLogin) => dispatch({ type: "LOGIN", payload: {dataLogin}}),
 })
 
