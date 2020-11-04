@@ -1,7 +1,7 @@
 const fs = require("fs")
 const http = require("http")
 const url = require("url")
-const app = require("./app")
+const app = require("./src/app")
 const hostname = "127.0.0.1"
 const port = 3001   
 
