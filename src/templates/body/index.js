@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Home,Regis,Login,User,DataUser} from '../../templates';
-import {Switch,Route} from "react-router-dom"
+import {Home,Regis,Login,User,DataUser,Edit} from '../../templates';
+import {Switch,Route,useParams} from "react-router-dom"
 
 class Body extends Component {
     constructor(props) {
@@ -67,6 +67,7 @@ class Body extends Component {
                         <Regis tambah = {this.addUsers}/>
                     </Route>
                     <Route path="/home" component={Home} />
+                    <Route path="/edit/:idx"  component={Edit}/>
                     <Route  path="/datauser" component={DataUser}></Route>
                     <Route  path="/login" component={Login}>
                         {/* <Login changeLogin={this.props.changeLogin} listUsers={this.state.users} /> */}
@@ -88,5 +89,6 @@ class Body extends Component {
          );
     }
 }
+
  
 export default Body;

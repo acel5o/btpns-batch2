@@ -1,6 +1,7 @@
 const initialState = {
     isLoggedIn: false,
-    tampung:[]
+    tampung:[],
+    dataUser:[]
 }
 
 const fetchData = (state = initialState, action) => {
@@ -8,7 +9,7 @@ const fetchData = (state = initialState, action) => {
     switch (action.type) {
         case "FETCH":
             return {
-                tampung:action.payload.tampung
+                tampung:action.payload.datauser
             }
         case "REGISTER":
             return {

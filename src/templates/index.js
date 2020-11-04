@@ -6,5 +6,6 @@ import Regis from "./pages/regis"
 import Login from "./pages/login"
 import User from "./pages/user"
 import DataUser from "./pages/datauser"
+import Edit from "./pages/edituser"
 
-export{Body,Nav,Contents,Home,Regis,Login,User,DataUser}
+export{Body,Nav,Contents,Home,Regis,Login,User,DataUser,Edit}

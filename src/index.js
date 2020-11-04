@@ -4,7 +4,7 @@ import App from './App';
 import {BrowserRouter as Router} from "react-router-dom"
 import { Provider } from "react-redux"
 import allReducers from "./reducers"
-import { createStore } from 'redux'
+import store  from './localstorage'
 
 
 /*
@@ -13,10 +13,6 @@ import { createStore } from 'redux'
       - Reducer
 */
 
-const store = createStore(
-  allReducers,
-  window._REDUX_DEVTOOLS_EXTENSION_ && window._REDUX_DEVTOOLS_EXTENSION_()
-);
 
 ReactDOM.render(
   <React.StrictMode>

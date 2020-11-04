@@ -12,34 +12,61 @@ class Login extends Component {
             password:""
          }
     }
+
+//     componentDidMount(){
+//         fetch('http://localhost:3001/data')
+//        .then(response => response.json())
+//        .then(json => this.setState({tampung1:json}))
+//    }
     
     onInputChange = e => {
             this.setState({
             [e.target.name]: e.target.value
         })
+        console.log(e.target.value);
     }
 
-    onLogin = () => {
-        const { username, password } = this.state
-        if (username && password){    
-            let statusLogin = this.props.userList.find(user => (user.username === username && user.password === password))
-            if (statusLogin){
-                window.alert('Berhasil Login!')
-                let role = statusLogin.role
-                this.props.doLogin({username,password,role})     
-            }else {
-                window.alert('Password atau Username Tidak Sesuai')
-            }
-          }
-          else {
-              window.alert("Username dan Password tidak boleh kosong!")
-          }
-        }
-    
+    doLogin = async (data) =>{
+        console.log(data);
+         await fetch('http://localhost:3001/auth/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+                
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            window.alert(result.message)
+            const dataUser = result.data[0].dataUser
+            const token = result.data[0].token
+            this.props.doLogin({dataUser,token})
+        })
+        .catch(error => console.log('error', error));
+    }
 
+    // onLogin = () => {
+    //     const { username, password } = this.state
+    //     if (username && password){    
+    //         let statusLogin = this.state.tampung1.find(user => (user.username === username && user.password === password))
+    //         if (statusLogin){
+    //             window.alert('Berhasil Login!')
+    //             let role = statusLogin.role
+    //             this.props.doLogin({username,password,role})     
+    //         }else {
+    //             window.alert('Password atau Username Tidak Sesuai')
+    //         }
+    //       }
+    //       else {
+    //           window.alert("Username dan Password tidak boleh kosong!")
+    //       }
+    //     }
     
-
     render() { 
+    const {username,password} = this.state
     if (this.props.statusLogin)
         return <Redirect to="/home" />
 
@@ -55,7 +82,7 @@ class Login extends Component {
                 <Label nmlabel="lname">Password</Label>
                 <Input type="password" id="password" name="password" onChange={this.onInputChange}/>
                 <Input type="reset" value="Reset" name="ulang" />
-                <Input type="button" value="Login" onClickInput={this.onLogin}/>
+                <Input type="button" value="Login" onClickInput={() => { this.doLogin({username,password})}}/>
             </form>
             </Container>
             {/* <Tabel>

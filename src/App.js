@@ -21,11 +21,21 @@ class App  extends Component {
     //     })
     // }
   
-    componentDidMount(){
-        fetch('http://localhost:3001/data')
-       .then(response => response.json())
-       .then(json => this.props.doFetch(json))    
-   }
+//     componentDidMount(){
+//              fetch('http://localhost:3001/auth/data',{
+//             method : 'GET',
+//             headers :{
+//                 Accept: 'application/json',
+//                 'Content-Type': 'application/json',
+//                 'Authorization' : 'Bearer '+this.props.dataLogin.token
+//             },
+//         })
+//        .then(response => response.json())
+//        .then(json => {
+//            console.log(json);
+//            this.props.doFetch(json)}
+//         )    
+//    }
     render() { 
         return (  
             <>
