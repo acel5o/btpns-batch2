@@ -1,0 +1,10 @@
+{
+    "env": {
+        "JWT_KEYS" : "rahasia",
+        "MYSQL_LIMIT": "",
+        "MYSQL_HOST" : "localhost",
+        "MYSQL_USER" : "root",
+        "MYSQL_PASS" : "",
+        "MYSQL_DB" : "belajardb"
+    }
+}
