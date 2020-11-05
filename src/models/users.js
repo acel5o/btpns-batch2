@@ -3,7 +3,7 @@ const conn = require("../confiq/database")
 const getUser=(username=null,password=null,cb=()=>{})=>{
     try{
         // const query = `select * from user1 where username='${username}' and password='${password}'`
-        conn.query("select role from user1 where username=? and password=? limit 1", [username,password],
+        conn.query("select b.name role from user_roles b INNER JOIN user a on a.role=b.id where username=? and password=? order by a.username limit 1", [username,password],
         function(error,results, fields){
             if (error) {
                 console.log("ERROR : getUser -", + error);

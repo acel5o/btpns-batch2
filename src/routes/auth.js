@@ -29,16 +29,19 @@ router.post("/login", (req, res) => {
     
             return res.status(200).send({
                 message: "User found!!",
-                data: [{token }]
+                data: [{token,role: data[0].role}]
             })
         }
-    
-        // login failed
         return res.status(401).send({
             error: "User not found!!"
         })
+
+        // login failed
     }catch(error){
-        return res.status(500).send({error : "ERROR LOGIN!"})
+        console.log(error);
+        return res.status(401).send({
+            error: "User not oo!!"
+        })
     }
     })
 })
