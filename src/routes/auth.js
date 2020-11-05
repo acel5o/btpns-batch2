@@ -15,6 +15,7 @@ router.post("/login", (req, res) => {
     // login success
 
     userModel.getUser(username, password, (error,data)=>{
+    try{
         if(error) return res.status(500).send({error})
 
         if (data.length) {
@@ -36,6 +37,9 @@ router.post("/login", (req, res) => {
         return res.status(401).send({
             error: "User not found!!"
         })
+    }catch(error){
+        return res.status(500).send({error : "ERROR LOGIN!"})
+    }
     })
 })
 
