@@ -4,7 +4,7 @@ const bodyParser = require("body-parser")
 
 const users = require("./routes/user")
 const auth = require("./routes/auth")
-const userss = require("./models/users")
+
 // const jsonParser = bodyParser.json()
 // const urlencodedParser = bodyParser.urlencoded({extended:false})
 app.use(bodyParser.urlencoded({extended:true}))
