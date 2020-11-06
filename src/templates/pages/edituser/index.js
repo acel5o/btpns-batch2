@@ -20,7 +20,6 @@ class Edit extends Component {
         this.setState({
             username : this.props.userList[indexUser].username,
             name : this.props.userList[indexUser].name,
-            password : this.props.userList[indexUser].password,
             role : this.props.userList[indexUser].role,
             lastusername : this.props.userList[indexUser].username,
         })
@@ -47,11 +46,10 @@ class Edit extends Component {
         .then(response => response.json())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
-      
     }
 
     render() { 
-        const {username,name,password,role,lastusername} = this.state
+        const {username,name,role,lastusername} = this.state
         
 
         if (!this.props.statusLogin)
@@ -68,12 +66,10 @@ class Edit extends Component {
                 <Input type="text" id="nama" name="username" onChange={this.onChangeInput} value={username} />
                 <Label nmlabel="lname">Name</Label>
                 <Input type="text" id="name" name="name" onChange={this.onChangeInput} value={name}/>
-                <Label nmlabel="lname">Password</Label>
-                <Input type="password" id="password" name="password" onChange={this.onChangeInput} value={password}/>
                 <Label nmlabel="lname">Roles</Label>
                 <Input type="text" id="role" name="role"  onChange={this.onChangeInput} value={role} />
                 <Input type="reset" value="Reset" name="ulang" />
-                <Input type="button" value="Save" onClickInput={() => {if (window.confirm('Apakah Data Ingin Diubah?')) this.editProfil({username,name,password,role},lastusername)}}/>
+                <Input type="button" value="Save" onClickInput={() => {if (window.confirm('Apakah Data Ingin Diubah?')) this.editProfil({username,name,role},lastusername)}}/>
             </form>
             </Container>
             </>

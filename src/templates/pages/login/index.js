@@ -43,6 +43,7 @@ class Login extends Component {
             window.alert(result.message)
             const dataUser = result.data[0].dataUser
             const token = result.data[0].token
+            console.log(dataUser);
             this.props.doLogin({dataUser,token})
         })
         .catch(error => console.log('error', error));

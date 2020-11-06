@@ -37,15 +37,16 @@ class Regis extends Component {
        .then(response => response.text())
     }
 
+    //perbaiki
     onRegis =  () => {
-        const {username,name,password,role} = this.state
+        const {username,name,password} = this.state
         const UserList = this.props.userList.find(user => (user.username === username))
         if (username && password){   
             if (UserList){
                 window.alert('Username sudah digunakan!');
             }else{
                     window.alert('Pendaftaran Berhasil!')
-                    this.postData({username,name,password,role})
+                    this.postData({username,name,password,role:"1"})
             }
         }
         else {

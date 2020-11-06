@@ -25,7 +25,7 @@ class DataUser extends Component {
            .then(result => {
                
                this.setState({tampung : result})
-            //    this.props.doFetch(this.state.tampung)
+               this.props.doFetch(this.state.tampung)
                console.log(this.state.tampung);
                 
         })
@@ -72,9 +72,9 @@ class DataUser extends Component {
                                           </>
                                       :
                                       <>{this.props.dataLogin.dataUser.username===user.username&&
-                                               <button>
-                                                        Edit
-                                               </button>
+                                        <Link to={"Edit/"+idx}>
+                                            <button>Edit</button>
+                                        </Link>
                                         }    
                                       </>
                                         }
